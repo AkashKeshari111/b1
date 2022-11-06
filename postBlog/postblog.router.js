@@ -2,8 +2,6 @@ const { Router } = require("express");
 const { authentication } = require("../Middleware/authentication");
 const { authorization } = require("../Middleware/authorization");
 const { PostBlogModel } = require("./postblog.model");
-var geoip = require('geoip-lite');
-const dns = require('node:dns');
 
 const app = Router();
 
@@ -37,10 +35,7 @@ app.post(
   authorization(["writer"]),
   async (req, res) => {
     const { title, description } = req.body;
-    const userId = req.body.user_id;
-   
-      // console.log('address: %j family: IPv%s', address, family);
-   
+    const userId = req.body.user_id; 
     try {
       const post = new PostBlogModel({
         title,
